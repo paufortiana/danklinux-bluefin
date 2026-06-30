@@ -12,16 +12,19 @@ cp -avf "/ctx/system_files"/. /
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
 
-# this installs a package from fedora repos
-dnf5 install -y tmux
+# Enable the COPR repos for dms and danklinux packages
+dnf5 -y copr enable avengemedia/dms
+dnf5 -y copr enable avengemedia/danklinux
 
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+# Install dms packages, niri and alacritty
+dnf5 install -y --refresh niri alacritty dms
 
-#### Example for enabling a System Unit File
+# Disable the COPR repos for dms and danklinux packages
+dnf5 -y copr disable avengemedia/dms
+dnf5 -y copr disable avengemedia/danklinux
 
-systemctl enable podman.socket
+# Clean up before finalizing the image
+rm -rf /tmp/*
+rm -rf /var/tmp/*
+dnf5 clean all
+rm -rf /var/cache/dnf /var/lib/dnf/repos /var/lib/dnf/system-repo.lock

@@ -1,0 +1,9 @@
+[general]
+import = [
+"~/.config/alacritty/dank-theme.toml"
+] 
+
+[window.padding]
+x = 20 
+y = 10
+
