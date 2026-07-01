@@ -6,6 +6,7 @@ export DMS_PRIVESC="${DMS_PRIVESC:-sudo}" # Preselect sudo as privilege escalati
 
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}"
 STATE_FILE="$STATE_DIR/dms-greeter-sync.done"
+DMS_CACHE_DIR="${DMS_CACHE_DIR:-/var/cache/dms-greeter}"
 
 wait_for_close() {
     if [[ -t 0 ]]; then
@@ -20,19 +21,27 @@ if [[ -e "$STATE_FILE" ]]; then
     exit 0
 fi
 
-echo "This window will run the DMS greeter synchronization for your user account."
-echo "After changing the wallpaper or theme, you may would like to run 'dms greeter sync' on your terminal to apply the changes on login screen."
+if [[ -d "$DMS_CACHE_DIR" ]]; then
+    if getfacl ~ ~/.config ~/.local ~/.cache ~/.local/state 2>/dev/null | grep -E '^user:greeter:' >/dev/null 2>&1; then
+        echo "User already has greeter permissions. Skipping greeter sync."
+        touch "$STATE_FILE"
+        exit 0
+    fi
+fi
+
+
+echo "This window will run the Dank Greeter synchronization for your user account (/usr/bin/dms greeter sync)."
 echo ""
-echo "Starting: dms greeter sync..."
+echo "Starting Dank Greeter synchronization..."
 
 if ! /usr/bin/dms greeter sync -y; then
     echo ""
-    echo "dms greeter sync did not complete. It will retry on next login." >&2
+    echo "Dank Greeter synchronization did not complete. It will retry on next login." >&2
     wait_for_close
     exit 1
 fi
 
 touch "$STATE_FILE"
 echo ""
-echo "dms greeter sync completed successfully."
+echo "Dank Greeter synchronization completed successfully."
 wait_for_close
