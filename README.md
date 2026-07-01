@@ -30,7 +30,7 @@ If you want to test it on a local bootc system, you can switch to the image with
 sudo bootc switch ghcr.io/paufortiana/dms-bluefin:latest
 ```
 
-The image will be built on weekly basis and published to GitHub Container Registry. The `ujust update` command will do the same as on your current uBlue system, with the new image, so you can use it to update your system to the latest version of the image (and the base image), including flatpaks and homebrew.
+The image will be built on weekly basis and published to GitHub Container Registry. The `ujust update` command will do the same as on Bluefin, with the new image, so you can use it to update your system to the latest version of the image (and the base image), including flatpaks and homebrew.
 
 Dank Greeter is available, and you can use it by disabling manually `gdm` and enabling the `greetd` service. 
 
@@ -39,7 +39,11 @@ sudo systemctl disable gdm
 sudo systemctl enable greetd
 ```
 
-Run `dms greeter sync` to add your user to greeter group and sync your niri theme and configuration to the greeter. 
+Run `dms greeter sync` after enabling `greetd` to add your user to greeter group, setup permissions, ACLs, and the necessary directories for the greeter. 
+
+Dank Linux provides a single wallpaper setup by default and the dinosaurs Bluefin wallpapers are located in `/usr/share/backgrounds`. 
+
+After setting or changing your preferred wallpaper, you can use the `dms greeter sync` command to sync your theme state and the wallpaper for Dank Greeter. 
 
 If using the `greetd` display manager, you can still login into GNOME or any other desktop environment by selecting it on the login screen, however some features that require the disabled display manager will not work, such as the GNOME settings.
 

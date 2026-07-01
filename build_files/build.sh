@@ -27,6 +27,7 @@ dnf5 -y copr disable avengemedia/danklinux
 systemctl --global enable dms-user-bootstrap.service
 
 # Clean up before finalizing the image
+rm -rf /run/selinux-policy
 rm -rf /run/dnf
 rm -rf /tmp/*
 rm -rf /var/tmp/*
