@@ -1,0 +1,10 @@
+[Unit]
+Description=Bootstrap niri and dms user config
+Before=graphical-session-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash /usr/libexec/dms-user-bootstrap.sh
+
+[Install]
+WantedBy=graphical-session-pre.target

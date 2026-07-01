@@ -23,7 +23,11 @@ dnf5 install -y --refresh niri alacritty dms
 dnf5 -y copr disable avengemedia/dms
 dnf5 -y copr disable avengemedia/danklinux
 
+# Enable first-login DMS bootstrap for all users.
+systemctl --global enable dms-user-bootstrap.service
+
 # Clean up before finalizing the image
+rm -rf /run/dnf
 rm -rf /tmp/*
 rm -rf /var/tmp/*
 dnf5 clean all
