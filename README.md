@@ -32,26 +32,25 @@ sudo bootc switch ghcr.io/paufortiana/dms-bluefin:latest
 
 The image will be built on weekly basis and published to GitHub Container Registry. The `ujust update` command will do the same as on Bluefin, with the new image, so you can use it to update your system to the latest version of the image (and the base image), including flatpaks and homebrew.
 
-Dank Greeter is available, and you can use it by disabling manually `gdm` and enabling the `greetd` service. 
+Dank Greeter (`greetd`) is the default display manager, and you can switch to `gdm` whenever needed by disabling manually the greetd service and enabling the gdm service. 
 
 ```bash
-sudo systemctl disable gdm
-sudo systemctl enable greetd
+sudo systemctl disable greetd
+sudo systemctl enable gdm
 ```
-
-Run `dms greeter sync` after enabling `greetd` to add your user to greeter group, setup permissions, ACLs, and the necessary directories for the greeter. 
+A script will run `dms greeter sync` to add your user to greeter group, setup permissions, ACLs, and the necessary directories for the greeter if it is not already done.
 
 Dank Linux provides a single wallpaper setup by default and the dinosaurs Bluefin wallpapers are located in `/usr/share/backgrounds`. 
 
-After setting or changing your preferred wallpaper, you can use the `dms greeter sync` command to sync your theme state and the wallpaper for Dank Greeter. 
+After setting or changing your preferred wallpaper, use the `dms greeter sync` command to sync your theme state and the wallpaper for Dank Greeter. 
 
-If using the `greetd` display manager, you can still login into GNOME or any other desktop environment by selecting it on the login screen, however some features that require the disabled display manager will not work, such as the GNOME settings.
+If using the `greetd` display manager, you can still login into GNOME or any other desktop environment by selecting it on the login screen, however some features that require the disabled display manager will not work, such as the GNOME settings. You can install dconf-editor flatpak to manage your GNOME settings, and use the builtin `dms` settings for your Dank Material Shell preferences.
 
 ### Recommended workflow
 
 1. Install a base Bluefin image first.
 2. Switch to the DMS-Bluefin image (you will need to select `niri` on the login screen after rebooting).
-3. Enjoy the DMS/Niri experience with all the features of Bluefin and Dank Material Shell.
+3. Enjoy the Niri experience with all the features Dank Material Shell and the quality of life improvements from Universal Blue.
 
 ## Local build
 

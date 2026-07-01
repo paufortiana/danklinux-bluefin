@@ -25,6 +25,11 @@ dnf5 -y copr disable avengemedia/danklinux
 
 # Enable first-login DMS bootstrap for all users.
 systemctl --global enable dms-user-bootstrap.service
+systemctl --global enable dms-greeter-sync.service
+
+# Switch from GDM to greetd for login management
+systemctl disable gdm
+systemctl enable greetd 
 
 # Clean up before finalizing the image
 rm -rf /run/selinux-policy

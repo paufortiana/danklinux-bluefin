@@ -1,0 +1,11 @@
+[Unit]
+Description=Run dms greeter sync
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecCondition=/usr/bin/test ! -e %h/.local/state/dms-greeter-sync.done
+ExecStart=/usr/bin/alacritty --hold -T "dms greeter sync" -e /usr/bin/bash /usr/libexec/dms-greeter-sync.sh
+
+[Install]
+WantedBy=graphical-session.target
