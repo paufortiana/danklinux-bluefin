@@ -1,24 +1,24 @@
 # Dank Linux Bluefin: Universal Blue's Bluefin + Dank Material Shell with Niri 
 
-This repository builds a custom Universal Blue's Bluefin bootc image including Dank Material Shell and Niri. The goal of this project is to provide a native-feeling Dank Material Shell with Niri experience on an immutable Fedora-based image, while staying close to the Universal Blue ecosystem. Starting from the Universal Blue image template repository, it is shaped into a project-specific bootc image that simply includes Dank Material Shell, Niri, and related assets in the immutable operating system. 
+This repository builds a custom Universal Blue's [Bluefin](https://projectbluefin.io/) bootc image including [Dank Linux](https://danklinux.com). The goal of this project is to provide a native-feeling Dank Material Shell with Niri experience on an immutable Fedora-based image, while staying close to the Universal Blue ecosystem. Starting from the Universal Blue [image template repository](https://github.com/ublue-os/image-template), it is shaped into a project-specific bootc image that simply includes Dank Material Shell, Niri, and related assets in the immutable operating system. 
 
 ## Project focus
 
-- dms and dms-greeter packages, niri and alacritty terminal emulator installation
+- Dank Material Shell packages, `niri` and `alacritty` terminal emulator installation
 - First-login bootstrap for ready-made user defaults
 - Configuration assets shipped in the image
-- dms-greeter login integration and defaults
+- Dank Greeter login integration and defaults
 
 ## Origin and inspiration
 
-This repository inherits the Universal Blue bootc image-template workflow and follows the spirit of the [Zirconium project](https://github.com/zirconium-dev) that brings native niri experience on Fedora system.
+This repository inherits the Universal Blue bootc image-template workflow and follows the spirit of the [Zirconium](https://github.com/zirconium-dev) project, that brings native Dank Linux with Niri experience on a Fedora-based system.
 
 It builds on the work of:
 
 - [Universal Blue](https://github.com/ublue-os)
-- [Avenge Media](https://github.com/AvengeMedia/DankMaterialShell)
+- [Avenge Media](https://github.com/AvengeMedia)
 
-After tinkering with Dank Material Shell on different compositors and base operating systems (and some distros bundling different shells and compositors), and discovering Zirconium, a fedora-based bootc image using the Dank Material Shell with Niri; the author's previous learning curiosity for bootc and immutable images rebasing led to try the Universal Blue image template and build a custom image with it. The goal is to provide another polished, modern desktop experience bootable image, that brings Dank Material Shell and Niri together on an immutable Fedora, using as the base the quality of life improvements of Universal Blue. The image is designed for users who want a modern, opinionated desktop experience with DMS and Niri with the benefits from the upstream Universal Blue ecosystem.
+After tinkering with Dank Material Shell on different compositors and base operating systems (and some distros bundling different shells and compositors), and discovering Zirconium; the author's previous learning curiosity for bootc and immutable images rebasing led to try the Universal Blue image template and build a custom image with it. The goal is to provide another polished, modern desktop experience bootable image, that brings Dank Material Shell and Niri together on an immutable Fedora, using as the base the quality of life improvements of Universal Blue. The image is designed for users who want a modern, desktop experience with Niri and the benefits from the upstream Universal Blue ecosystem.
 
 This image uses Niri, the preferred choice in Dank Linux; however, Hyprland is also a strong alternative that is worth considering. The base image is Bluefin, which provides GNOME as the default desktop environment, and the DX version of Bluefin could be also used as a base image for an even more feature-rich experience. The author didn't managed the featured DX toggle ujust, so using the toggle would rebase to original Bluefin, and the DX version of Bluefin. If you build your own image, you can use the DX version of Bluefin as a base image and it should work fine. You can also manage another terminal emulator, such as ghostty or kitty.
 
@@ -31,6 +31,17 @@ sudo bootc switch ghcr.io/paufortiana/dms-bluefin:latest
 ```
 
 The image will be built on weekly basis and published to GitHub Container Registry. The `ujust update` command will do the same as on your current uBlue system, with the new image, so you can use it to update your system to the latest version of the image (and the base image), including flatpaks and homebrew.
+
+Dank Greeter is available, and you can use it by disabling manually `gdm` and enabling the `greetd` service. 
+
+```bash
+sudo systemctl disable gdm
+sudo systemctl enable greetd
+```
+
+Run `dms greeter sync` to add your user to greeter group and sync your niri theme and configuration to the greeter. 
+
+If using the `greetd` display manager, you can still login into GNOME or any other desktop environment by selecting it on the login screen, however some features that require the disabled display manager will not work, such as the GNOME settings.
 
 ### Recommended workflow
 
@@ -54,4 +65,4 @@ Follow instructions in the [ublue-os/image-template repository README](https://g
 
 ## Thanks
 
-A big thank-you to the people behind [uBlue](https://universal-blue.org/) and [DankLinux](https://danklinux.com) for the projects, ideas, and tools that made my new favorite operating system possible. It is deeply thankful to the uBlue project for providing the excellent template and workflow foundation, and to the Dank Linux project for providing excellent documentation and resources for manual installation and configuration.
+A big thank-you to the people behind [Universal Blue](https://universal-blue.org/) and [Dank Linux](https://danklinux.com) for the projects, ideas, and tools that made my new favorite operating system possible. It is deeply thankful to the Universal Blue project for providing the excellent template and workflow foundation, and to the Dank Linux project for providing excellent documentation and resources for manual installation and configuration.

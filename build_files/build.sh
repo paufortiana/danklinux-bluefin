@@ -17,7 +17,7 @@ dnf5 -y copr enable avengemedia/dms
 dnf5 -y copr enable avengemedia/danklinux
 
 # Install dms packages, niri and alacritty
-dnf5 install -y --refresh niri alacritty dms
+dnf5 install -y --refresh niri alacritty dms dms-greeter
 
 # Disable the COPR repos for dms and danklinux packages
 dnf5 -y copr disable avengemedia/dms
